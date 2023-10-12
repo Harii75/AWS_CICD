@@ -1,7 +1,7 @@
 # AWS CICD PIPELINE
 
 - A projektnek csak a CI része van ledokumentálva
-!
+  
 ![](https://github.com/Harii75/AWS_CICD/blob/main/AWS/K%C3%A9perny%C5%91k%C3%A9p%202023-10-12%20175448.png?raw=true)
 ## Projekt célja:
 Ebben a projektben egy egyszerű Flask alkalmazást implementálunk egy CI/CD pipeline-ba. Az alkalmazás kódját a CodeCommit használatával kezeljük, a CodeBuild segítségével építjük, a CodePipeline segítségével automatizáljuk a CI/CD folyamatot,CodeDeploy használatával telepítjük az alkalmazást egy EC2 VM-re.
@@ -10,19 +10,29 @@ Ebben a projektben egy egyszerű Flask alkalmazást implementálunk egy CI/CD pi
 ### 1. CodeBuild configurálása.
 
   Előszőr létrehozzuk a projektet. <br>
-  <img src="https://github.com/Harii75/AWS_CICD/blob/main/AWS/codebuild-1.png" width=50% height=50%> 
   
-  Ezt követően összekötjük a GitHub fiókunkat az CodeCommittal és kiválasztjuk a repot ahol a Flask appunk van.<br>
-  <img src="./AWS/codebuild2.png" width=50% height=50%><br>
+  <img src="https://github.com/Harii75/AWS_CICD/blob/main/AWS/codebuild-1.png" width=50% height=50%> 
+  <hr>
+  
+  Ezt követően összekötjük a GitHub fiókunkat az CodeBuilddel és kiválasztjuk a repot ahol a Flask appunk van.<br>
 
+  
+  <img src="./AWS/codebuild2.png" width=50% height=50%><br>
+  <hr>
+  
   Ezen a projeken Ubuntu fut <br>
+  
   <img src="./AWS/codebuild3.png" width=50% height=50%><br>
 
   Majd a CodeCommithoz rendelt role-hoz hozzáadjuk a  "SSMFullAccess"-t policyt, hogy önállóan működni és mivel ez csak egy projektes AWS fiók volt ezért full S3 acesst kapott, ugyanis késöbb a buildeknél dolgozni fog a tárhellyel is.
 
+  <hr>
+  
   A build specsnél megadjuk szükséges stageket és secreteket.
   - Env: Itt megadásra kerültek a "bizalmas" adatok a SystemsManager \ ParameterStore serviceben ahol Key/Value párok segítségével biztonságosabban tudok buildelni.
   - Install: Egy teljessen alap szál Flask appot fogunk hostolni. A Flash egy Python web framework tehát tel kell telepítünk a Python legutolsó verzióját.
   - PreBuild: Dependency telepítések: Flask.
-  - Build: 
-  <img src="./AWS/codebuild3.png" width=50% height=50%><br>  
+  - Build: Ez a rész Docker segítségével fog megtörténni, utána a Docker Registry-re (docker.io) fogja felpusholni az imaget a célrepóba.
+  - PostBuild: Sima clearup, jelzi, hogy átjutott az előző három fázison.<br>
+  <img src="./AWS/buildspec.png" width=50% height=50%><br>
+  <hr>
