@@ -1,6 +1,6 @@
 # AWS CICD PIPELINE
 
-- A projektnek csak a CI része van ledokumentálva
+- A projektnek csak a CI része van ledokumentálva.
   
 ![](https://github.com/Harii75/AWS_CICD/blob/main/AWS/K%C3%A9perny%C5%91k%C3%A9p%202023-10-12%20175448.png?raw=true)
 ## Projekt célja:
@@ -20,7 +20,7 @@ Ebben a projektben egy egyszerű Flask alkalmazást implementálunk egy CI/CD pi
   <img src="./AWS/codebuild2.png" width=50% height=50%><br>
   <hr>
   
-  Ezen a projeken Ubuntu fut <br>
+  Erre a projekrre Ubuntut választottam. <br>
   
   <img src="./AWS/codebuild3.png" width=50% height=50%><br>
 
