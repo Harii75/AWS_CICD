@@ -34,5 +34,41 @@ Ebben a projektben egy egyszerű Flask alkalmazást implementálunk egy CI/CD pi
   - PreBuild: Dependency telepítések: Flask.
   - Build: Ez a rész Docker segítségével fog megtörténni, utána a Docker Registry-re (docker.io) fogja felpusholni az imaget a célrepóba.
   - PostBuild: Sima clearup, jelzi, hogy átjutott az előző három fázison.<br>
+
   <img src="./AWS/buildspec.png" width=50% height=50%><br>
   <hr>
+
+  Ezek után természetesen nem felejtünk el jogot is adni az image buildeléshez. 
+  
+  <img src="./AWS/role2.png" width=50% height=50%><br>
+  <hr>
+
+  Valamint a sikeres buildek ahol láthatjuk a cleanup messaget:
+  
+  <img src="./AWS/sucess1.png" width=50% height=50%><br>
+  <img src="./AWS/sucess2.png" width=50% height=50%><br>
+  <hr>
+  
+  ### 2. CodePipeline configurálása.
+
+  Ezért kellet az S3 acess, ugyanis ez egy temporary AWS fiók, és restrictelve van a GitHub v2-re. Ez csak annyit jelenet, hogy le kell töltenie a repot build előtt.<br>
+  
+  <img src="./AWS/pipeline/pipeline1.png" width=50% height=50%><br>
+
+  <hr>
+  Az előző képen látott újboli fiókösszekötés és a webhook alapú change detection kiválasztása után meghatározzuk a build staget.<br>
+
+  <img src="./AWS/pipeline/pipeline2.png" width=50% height=50%><br>
+
+  <hr>
+
+  És végül kész van a CI része a projektnek. <br>
+  
+  <img src="https://github.com/Harii75/AWS_CICD/blob/main/AWS/pipeline/sucessful%20build.png?raw=true" width=50% height=50%><br>
+
+  
+
+  
+
+  
+
